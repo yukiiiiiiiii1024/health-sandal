@@ -24,7 +24,7 @@
   "hero": {
     "title": "足から始める健康旅行！！",
     "subtitle": "旅行に疲れた足に、極上の癒やしを。三世代でおそろいの健康サンダルを履いて、最高の思い出を作りませんか？",
-    "image": "./static/images/hero_bg.png",
+    "image": "/static/images/l-interview-1.png",
     "title_size": "56px",
     "subtitle_size": "24px"
   },
@@ -40,9 +40,9 @@
     "desc_1": "足元から全身を整える、新感覚 of 健康サンダルです。独自のインソール設計が、歩くたびに足裏を心地よく刺激します。",
     "desc_2": "【三世代でおそろい】子供用からシニア用まで豊富なサイズとカラーを用意。家族みんなでお揃いのサンダルを履き、旅行中の疲労を軽減させながら、足元から繋がる温かい家族の時間を提供します。",
     "images": [
-      "./static/images/sandal_overview.png",
-      "./static/images/sandal_family.png",
-      "./static/images/sandal_detail.png"
+      "/static/images/0509135421_62789e7d1cf9d.jpg",
+      "/static/images/20210705142407_9_1.jpg",
+      "/static/images/0509135455_62789e9f32d20.jpg"
     ],
     "benefits": [
       {

@@ -8,7 +8,7 @@ app = Flask(__name__, static_folder='static')
 # 設定
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data.json')
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static', 'images')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'svg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # ファイルサイズ制限 (16MB)
