@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>足から始める健康旅行！！ - ラッキーベル リボーンサンダル宿泊プラン</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+
+    <!-- 管理者コントロールパネル -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-panel-content">
+            <!-- 未ログイン時の表示 -->
+            <div id="admin-login-area" class="admin-login-area">
+                <span class="admin-label"><i class="fa-solid fa-lock"></i> 管理者ログイン:</span>
+                <input type="password" id="admin-id-input" placeholder="ログインIDを入力" class="admin-input">
+                <button id="admin-login-btn" class="admin-btn-small">ログイン</button>
+                <span id="login-error-msg" class="login-error-msg"></span>
+            </div>
+            
+            <!-- ログイン済みの表示（初期状態では非表示） -->
+            <div id="admin-logged-in-area" class="admin-logged-in-area hidden">
+                <span class="admin-badge"><i class="fa-solid fa-user-gear"></i> 管理者モード</span>
+                <div class="admin-controls">
+                    <label class="switch">
+                        <input type="checkbox" id="edit-mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-label">編集モードON</span>
+                </div>
+                <button id="save-btn" class="save-btn" disabled><i class="fa-solid fa-floppy-disk"></i> 変更を保存</button>
+                <button id="admin-logout-btn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> ログアウト</button>
+            </div>
+            <div id="save-status" class="save-status"></div>
+        </div>
+    </div>
+
+    <!-- 編集中の要素に対するフォントサイズツールバー -->
+    <div id="fontsize-toolbar" class="fontsize-toolbar hidden">
+        <label for="font-size-input">文字サイズ:</label>
+        <input type="range" id="font-size-input" min="12" max="80" step="1">
+        <span id="font-size-val">16px</span>
+    </div>
+
+    <!-- ナビゲーションバー -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="brand-logo">
+                <span class="logo-icon"><i class="fa-solid fa-shoe-prints"></i></span>
+                <span id="nav-brand" class="editable" data-section="navigation" data-key="brand" data-type="text">健康サンダル旅行</span>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#hero" class="nav-link">トップ</a></li>
+                <li class="nav-item"><a href="#background" class="nav-link">企画の背景</a></li>
+                <li class="nav-item"><a href="#sandal" class="nav-link">サンダル紹介</a></li>
+                <li class="nav-item"><a href="#plans" class="nav-link">宿泊プラン</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <header id="hero" class="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./static/images/hero_bg.png');">
+        <!-- 画像変更用隠し入力 & ボタン -->
+        <div class="image-edit-overlay" data-target-section="hero" data-target-key="image">
+            <button class="image-edit-btn"><i class="fa-solid fa-camera"></i> 背景画像を変更</button>
+            <input type="file" class="image-upload-input" accept="image/*" style="display: none;">
+        </div>
+        <div class="hero-content container">
+            <h1 id="hero-title" class="editable fade-in" data-section="hero" data-key="title" data-type="text" style="font-size: 56px;">
+                足から始める健康旅行！！
+            </h1>
+            <p id="hero-subtitle" class="editable fade-in-delay" data-section="hero" data-key="subtitle" data-type="text" style="font-size: 24px;">
+                旅行に疲れた足に、極上の癒やしを。三世代でおそろいの健康サンダルを履いて、最高の思い出を作りませんか？
+            </p>
+            <a href="#plans" class="cta-btn fade-in-delay-2">宿泊プランを見る <i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+    </header>
+
+    <!-- 企画背景セクション -->
+    <section id="background" class="section bg-light">
+        <div class="container grid-2">
+            <div class="section-text">
+                <h2 id="background-title" class="section-title editable" data-section="background" data-key="title" data-type="text" style="font-size: 36px;">
+                    なぜこの企画を考えたか？
+                </h2>
+                <div class="title-line"></div>
+                <p id="background-text1" class="text-p editable" data-section="background" data-key="text_1" data-type="textarea" style="font-size: 18px;">
+                    楽しい旅行も、歩き続けると夕方には足がパンパンに疲れてしまいます。せっかくの家族旅行、全員が全力で楽しむためには「足の健康」が欠かせません。
+                </p>
+                <p id="background-text2" class="text-p editable" data-section="background" data-key="text_2" data-type="textarea" style="font-size: 18px;">
+                    そこで私たちは、教育シューズで有名なラッキーベルの「リボーンサンダル」に着目しました。このサンダルが生み出すリフレッシュ効果を、ぜひ実際の旅行中に体験してほしいという強い思いから、この特別な宿泊プランが誕生しました。
+                </p>
+            </div>
+            <div class="section-image-wrapper card-animation">
+                <!-- 遊び心：足つぼグラフィック -->
+                <div class="foot-graphic">
+                    <div class="foot-bone">
+                        <i class="fa-solid fa-heart beat-icon"></i>
+                        <span>足は第二の心臓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サンダル概要セクション -->
+    <section id="sandal" class="section">
+        <div class="container">
+            <h2 id="sandal-title" class="section-title text-center editable" data-section="sandal" data-key="title" data-type="text" style="font-size: 36px;">
+                ラッキーベル リボーンサンダルの魅力
+            </h2>
+            <div class="title-line center"></div>
+            
+            <div class="grid-2 gap-4 mt-3">
+                <div class="sandal-slider-container">
+                    <div class="slider-wrapper">
+                        <!-- スライドが動的に描画されますが、初期表示用にデフォルトを書いておきます -->
+                        <div class="slide active">
+                            <img class="product-img img-responsive" src="./static/images/sandal_overview.png" alt="ラッキーベル リボーンサンダル">
+                        </div>
+                        <div class="slide">
+                            <img class="product-img img-responsive" src="./static/images/sandal_family.png" alt="ラッキーベル リボーンサンダル 使用イメージ">
+                        </div>
+                        <div class="slide">
+                            <img class="product-img img-responsive" src="./static/images/sandal_detail.png" alt="ラッキーベル リボーンサンダル ディテール">
+                        </div>
+                    </div>
+                    
+                    <!-- カルーセル操作用矢印 -->
+                    <button class="slider-arrow prev-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slider-arrow next-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                    
+                    <!-- インディケーター（ドット） -->
+                    <div class="slider-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+
+                    <!-- 管理者用の写真変更・追加・削除オーバーレイ -->
+                    <div class="image-edit-overlay" data-target-section="sandal" data-target-key="images">
+                        <div class="admin-slide-controls">
+                            <button class="image-edit-btn" id="change-current-slide-btn"><i class="fa-solid fa-camera"></i> 写真を変更</button>
+                            <button class="admin-action-btn add-slide-btn"><i class="fa-solid fa-plus"></i> 追加</button>
+                            <button class="admin-action-btn delete-slide-btn"><i class="fa-solid fa-trash"></i> 削除</button>
+                        </div>
+                        <input type="file" class="image-upload-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="section-text flex-center-y">
+                    <p id="sandal-desc1" class="text-p editable" data-section="sandal" data-key="desc_1" data-type="textarea" style="font-size: 18px;">
+                        足元から全身を整える、新感覚の健康サンダルです。独自のインソール設計が、歩くたびに足裏を心地よく刺激します。
+                    </p>
+                    <p id="sandal-desc2" class="text-p editable" data-section="sandal" data-key="desc_2" data-type="textarea" style="font-size: 18px;">
+                        【三世代でおそろい】子供用からシニア用まで豊富なサイズとカラーを用意。家族みんなでお揃いのサンダルを履き、旅行中の疲労を軽減させながら、足元から繋がる温かい家族の時間を提供します。
+                    </p>
+                    
+                    <div class="benefits-list mt-2">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h4 class="benefit-title">疲労回復効果</h4>
+                                <p class="benefit-desc">歩き疲れた足裏の筋肉を優しくほぐし、翌日の旅も軽やかに。</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h4 class="benefit-title">正しい歩行姿勢</h4>
+                                <p class="benefit-desc">アーチサポート機能により、自然と背筋が伸びる美しい姿勢をサポート。</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h4 class="benefit-title">三世代デザイン</h4>
+                                <p class="benefit-desc">年齢を問わず愛される、シンプルで遊び心のあるプレミアムなデザイン。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 遊び心コンテンツ：お疲れ度セルフチェック -->
+    <section class="section bg-primary text-white check-section">
+        <div class="container text-center max-w-700">
+            <h2>👣 旅行の足疲れセルフチェック</h2>
+            <p>あてはまる項目をチェックして、あなたの足裏状態を見てみましょう！</p>
+            <div class="checker-card">
+                <div class="check-options">
+                    <label class="check-option">
+                        <input type="checkbox" class="foot-check" value="1">
+                        <span>夕方になると靴がきかつ感じる</span>
+                    </label>
+                    <label class="check-option">
+                        <input type="checkbox" class="foot-check" value="2">
+                        <span>歩いているとふくらはぎが張ってくる</span>
+                    </label>
+                    <label class="check-option">
+                        <input type="checkbox" class="foot-check" value="3">
+                        <span>足の裏がじんじん、火照るような疲れがある</span>
+                    </label>
+                    <label class="check-option">
+                        <input type="checkbox" class="foot-check" value="4">
+                        <span>翌朝になっても足のだるさが抜けない</span>
+                    </label>
+                </div>
+                <button id="calc-checks-btn" class="secondary-btn mt-2">診断する</button>
+                <div id="check-result" class="check-result mt-2 hidden">
+                    <h3 id="result-title"></h3>
+                    <p id="result-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宿泊プランセクション -->
+    <section id="plans" class="section bg-light">
+        <div class="container">
+            <h2 id="plans-title" class="section-title text-center editable" data-section="plans" data-key="title" data-type="text" style="font-size: 36px;">
+                宿泊プラン一覧
+            </h2>
+            <p id="plans-subtitle" class="text-center text-muted editable" data-section="plans" data-key="subtitle" data-type="text" style="font-size: 18px;">
+                あなたの家族に最適な、サンダル体験付き特別宿泊プラン
+            </p>
+            <div class="title-line center"></div>
+
+            <div class="plans-grid mt-3">
+                <!-- プラン 1 -->
+                <div class="plan-card" data-plan-id="1">
+                    <div class="plan-image-wrapper">
+                        <img class="plan-img" src="./static/images/plan_ryokan.png" alt="【三世代ファミリー限定】足元から整う温泉旅行プラン">
+                        <div class="image-edit-overlay" data-target-section="plans" data-target-list-id="1" data-target-key="image">
+                            <button class="image-edit-btn"><i class="fa-solid fa-camera"></i> プラン写真を変更</button>
+                            <input type="file" class="image-upload-input" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="plan-body">
+                        <h3 class="plan-card-title editable-list" data-section="plans" data-list-id="1" data-key="title">
+                            【三世代ファミリー限定】足元から整う温泉旅行プラン
+                        </h3>
+                        <p class="plan-card-desc editable-list" data-section="plans" data-list-id="1" data-key="description">
+                            おじいちゃん、おばあちゃんからお子様まで、全員分のリボーンサンダルがお土産として付いてくる一番人気のプランです。お揃いのサンダルで宿の周りをお散歩しましょう！
+                        </p>
+                        <div class="plan-footer">
+                            <span class="plan-price editable-list" data-section="plans" data-list-id="1" data-key="price">
+                                大人 18,500円〜 / 名（消費税込）
+                            </span>
+                            <button class="book-btn" onclick="bookingPopup('【三世代ファミリー限定】足元から整う温泉旅行プラン')">プランを予約する</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- プラン 2 -->
+                <div class="plan-card" data-plan-id="2">
+                    <div class="plan-image-wrapper">
+                        <img class="plan-img" src="./static/images/plan_ryokan.png" alt="【健康意識向上】極上のフットケア＆疲労回復ステイプラン">
+                        <div class="image-edit-overlay" data-target-section="plans" data-target-list-id="2" data-target-key="image">
+                            <button class="image-edit-btn"><i class="fa-solid fa-camera"></i> プラン写真を変更</button>
+                            <input type="file" class="image-upload-input" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="plan-body">
+                        <h3 class="plan-card-title editable-list" data-section="plans" data-list-id="2" data-key="title">
+                            【健康意識向上】極上のフットケア＆疲労回復ステイプラン
+                        </h3>
+                        <p class="plan-card-desc editable-list" data-section="plans" data-list-id="2" data-key="description">
+                            旅の疲れを徹底的に癒やしたい方向け。リボーンサンダルの体験に加え、温泉での足湯スパ、特製ハーブティーがセットになったリラクゼーション重視のプランです。
+                        </p>
+                        <div class="plan-footer">
+                            <span class="plan-price editable-list" data-section="plans" data-list-id="2" data-key="price">
+                                大人 21,000円〜 / 名（消費税込）
+                            </span>
+                            <button class="book-btn" onclick="bookingPopup('【健康意識向上】極上のフットケア＆疲労回復ステイプラン')">プランを予約する</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 健康サンダル旅行 All Rights Reserved.</p>
+            <p class="footer-sub">ラッキーベル リボーンサンダルコラボ企画</p>
+        </div>
+    </footer>
+
+    <!-- 予約用ポップアップ（仮） -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fa-regular fa-calendar-check"></i> プラン予約</h2>
+            </div>
+            <div class="modal-body">
+                <p>ご予約ありがとうございます！</p>
+                <p id="modal-plan-name" class="modal-plan-name"></p>
+                <p class="modal-notice">※こちらはデモンストレーション用の予約フォームです。実際のご予約は行われません。体験用のリボーンサンダルはチェックイン時にフロントにてお渡しいたします。</p>
+                <button class="cta-btn w-full mt-2" onclick="closeBookingModal()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="./static/js/main.js"></script>
+</body>
+</html>
